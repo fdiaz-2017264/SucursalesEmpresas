@@ -57,8 +57,8 @@
 .texto-formulario h2, .input label, .password-olvidada a, .texto-formulario p{
     color: var(--blanco);
 }
-.texto-formulario h2{
-    font-size: 40px;
+.texto-formulario h3{
+    font-size: 20px;
     text-align: center;
 }
 .texto-formulario p{
