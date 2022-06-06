@@ -18,9 +18,9 @@ import { ProductsComponent } from './components/products/products.component';
     FooterComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
     BranchOfficeComponent,
-    ProductsComponent
+    ProductsComponent,
   ],
   imports: [
     BrowserModule,
