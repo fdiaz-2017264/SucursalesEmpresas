@@ -11,6 +11,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { BranchOfficeComponent } from './components/branch-office/branch-office.component';
 import { ProductsComponent } from './components/products/products.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { ViewCompanyComponent } from './components/view-company/view-company.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     BranchOfficeComponent,
     ProductsComponent,
     NotFoundComponent,
+    ViewCompanyComponent,
   ],
   imports: [
     BrowserModule,
