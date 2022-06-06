@@ -10,6 +10,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { BranchOfficeComponent } from './components/branch-office/branch-office.component';
 import { ProductsComponent } from './components/products/products.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ProductsComponent } from './components/products/products.component';
     RegisterComponent,
     BranchOfficeComponent,
     ProductsComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
