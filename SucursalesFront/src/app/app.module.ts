@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
+import { BranchOfficeComponent } from './components/branch-office/branch-office.component';
 import { ProductsComponent } from './components/products/products.component';
 
 @NgModule({
@@ -14,6 +15,7 @@ import { ProductsComponent } from './components/products/products.component';
     NavbarComponent,
     FooterComponent,
     HomeComponent,
+    BranchOfficeComponent,
     ProductsComponent
   ],
   imports: [
