@@ -1,0 +1,33 @@
+<app-navbar></app-navbar>
+
+<br>
+<br>
+
+    <div class="contenedor-formulario contenedor">
+        <form  (ngSubmit)="login()" #loginForm="ngForm"  class="formulario">
+            <div class="texto-formulario">
+                <h2>Login</h2>
+            </div>
+
+            <div class="input">
+                <label class="form-label" >Company</label>
+                <input [(ngModel)]="company.name" name="name"  placeholder="Enter Company" type="text" id="form3Example1m1" class="form-control" />
+            </div>
+        
+            <div class="input">
+                <label  class="form-label">Password</label>
+                <input  [(ngModel)]="company.password" name="password"  placeholder="Password" type="password" id="form3Example1m1" class="form-control" />
+            </div>
+
+            <div class="password-olvidada">
+                <a routerLink="/register">Create company</a>
+            </div>
+
+            <div class="input mt-4">
+                <button type="submit" class="btn btn-warning m-2">Login</button>
+            </div>
+        </form>
+        <div class="imagen-formulario">
+
+        </div>
+    </div>
