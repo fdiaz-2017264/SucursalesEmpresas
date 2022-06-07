@@ -8,14 +8,12 @@
 
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav me-auto">
+<!--Agregado-->
         <li class="nav-item">
-          <a class="nav-link" routerLink="/productsCompany">Products</a>
+          <a class="nav-link" *ngIf="token" routerLink="/productsCompany">Products</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/offices">Offices</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="">Export</a>
+          <a class="nav-link" *ngIf="token" routerLink="/offices">Offices</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
@@ -24,13 +22,14 @@
               <path
                 d="M9 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-9 8c0 1 1 1 1 1h10s1 0 1-1-1-4-6-4-6 3-6 4Zm13.5-8.09c1.387-1.425 4.855 1.07 0 4.277-4.854-3.207-1.387-5.702 0-4.276Z" />
             </svg></a>
+<!--Agregado-->
           <div class="dropdown-menu">
             <a class="dropdown-item" routerLink="/view-company">Profile</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Log out</a>
+            <a class="dropdown-item" routerLink="/login">Log out</a>
           </div>
         </li>
       </ul>
-    </div>
-  </div>
+</div>
+</div>
 </nav>

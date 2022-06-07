@@ -15,7 +15,7 @@ exports.saveEmpresa = async (req, res) => {
         let data = {
             name: params.name,
             typeOfCompany: params.typeOfCompany,
-            municipality: params.municipality,
+            town: params.town,
             password: params.password,
             role: 'COMPANY'
         }
@@ -49,6 +49,7 @@ exports.loginCompany = async (req, res) => {
             password: params.password
         }
         let msg = validateData(data);
+
         if (msg) return res.status(400).send(msg);
         let alreadyEmpresa = await searchComany(params.name);
         if (alreadyEmpresa && await checkPass(data.password, alreadyEmpresa.password)) {
@@ -56,12 +57,16 @@ exports.loginCompany = async (req, res) => {
             delete alreadyEmpresa.password;
 
             return res.send({ token, message: 'Welcome', alreadyEmpresa })
-        } else return res.status(401).send({ message: 'Log in error' });
+
+        } else return res.status(401).send({ message: 'User or Password incorrect' });
+
     } catch (err) {
         console.log(err);
         return res.status(500).send({ err, message: 'Error' })
     }
 }
+
+
 
 exports.deleteCompany = async (req, res) => {
     try {
@@ -170,6 +175,19 @@ exports.getCompany = async (req,res)=>{
         return res.status(500).send('Error Get Company')
     }
 }
+
+
+exports.getCompanyId = async(req,res)=>{
+    try{
+        const idCompany = req.params.id;  
+        const company = await Empresa.findOne({_id: idCompany});
+        return res.send({message: 'Company Found' , company});
+    }catch(err){
+        console.log(err); 
+        return res.status().send('Error Get Company Id'); 
+    }
+}
+
 
 exports.updateAdminCompany = async(req,res)=>{
     try{

@@ -13,6 +13,9 @@ import { BranchOfficeComponent } from './components/branch-office/branch-office.
 import { ProductsComponent } from './components/products/products.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ViewCompanyComponent } from './components/view-company/view-company.component';
+import { FormsModule } from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+
 
 
 @NgModule({
@@ -31,7 +34,9 @@ import { ViewCompanyComponent } from './components/view-company/view-company.com
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
