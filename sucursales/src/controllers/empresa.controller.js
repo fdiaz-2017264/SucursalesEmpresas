@@ -176,6 +176,19 @@ exports.getCompany = async (req,res)=>{
     }
 }
 
+
+exports.getCompanyId = async(req,res)=>{
+    try{
+        const idCompany = req.params.id;  
+        const company = await Empresa.findOne({_id: idCompany});
+        return res.send({message: 'Company Found' , company});
+    }catch(err){
+        console.log(err); 
+        return res.status().send('Error Get Company Id'); 
+    }
+}
+
+
 exports.updateAdminCompany = async(req,res)=>{
     try{
         const dentCompany = req.params.id; 

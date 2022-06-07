@@ -19,6 +19,7 @@ api.put('/updateCompany/:id',[mdAuth.ensureAuth, mdAuth.isAdmin], empresaControl
 api.post('/adminCompany', [mdAuth.ensureAuth,mdAuth.admin], empresaController.adminComany);
 api.delete('/deleteAdminCompany/:id',[mdAuth.ensureAuth, mdAuth.admin] ,empresaController.deleteAdminCompany);
 api.get('/getCompany', [mdAuth.ensureAuth, mdAuth.admin], empresaController.getCompany);
+api.get('/getIdCompany/:id', mdAuth.ensureAuth, empresaController.getCompanyId); /**/
 api.put('/updateAdminCompany/:id',[mdAuth.ensureAuth, mdAuth.admin], empresaController.updateAdminCompany);
 
 module.exports = api; 

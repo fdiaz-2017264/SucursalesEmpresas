@@ -28,8 +28,8 @@ export class LoginComponent implements OnInit {
        next: (res:any)=>{
           alert(res.message);
           localStorage.setItem('token', res.token);
-          localStorage.setItem('identity', JSON.stringify(res.already));
-          this.router.navigateByUrl('/productsCompany');
+          localStorage.setItem('identity', JSON.stringify(res.alreadyEmpresa));
+          this.router.navigateByUrl('/home');
        },
        error: (err)=> alert(err.error.message || err.error)
     })
