@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CompanyRestService } from 'src/app/services/companyRest/company-rest.service';
 
 @Component({
   selector: 'app-navbar',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  token:any;
 
-  constructor() { }
+  constructor(
+    private companyRest: CompanyRestService
+  ) { }
 
   ngOnInit(): void {
+    this.token = this.companyRest.getToken();
   }
+  
 
 }

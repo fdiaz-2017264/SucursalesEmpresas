@@ -46,7 +46,7 @@
 
     <div class="d-flex justify ">
       <button type="button" routerLink="/home" class="btn btn-dark m-2">Cancel</button>
-      <button type="submit" class="btn btn-warning m-2">Register</button>
+      <button [disabled]="!registerForm.form.valid" type="submit" class="btn btn-warning m-2">Register</button>
     </div>
   </form>
   <div class="imagen-formulario">
