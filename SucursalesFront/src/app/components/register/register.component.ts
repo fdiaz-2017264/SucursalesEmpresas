@@ -25,6 +25,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
   register(registerForm:any){
     this.comanyRest.register(this.company).subscribe({
       next: (responsive:any) =>{
@@ -37,6 +38,36 @@ export class RegisterComponent implements OnInit {
       }
     })
   }
+  
 
+/*
+
+  register(registerForm:any){
+    this.comanyRest.register(this.company).subscribe({
+      next: (res:any)=>{
+        Swal.fire({
+          position: 'top-end',
+          title: res.message,
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 1000
+        })
+          return this.router.navigateByUrl('/login');
+      },
+      error:(err)=>{
+        registerForm.reset();
+        return Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Hubo un error creando la cuenta',
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }
+      
+    })
+  }
+
+  */
   
 }

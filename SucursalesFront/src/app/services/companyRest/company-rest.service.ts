@@ -24,6 +24,7 @@ export class CompanyRestService {
   login(params:{}){
     return this.http.post(environment.baseUrl + 'empresa/loginCompany', params, {headers: this.httpOptions});
   }
+  
 
   getToken(){
     let globalToken = localStorage.getItem('token');
