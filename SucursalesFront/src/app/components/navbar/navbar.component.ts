@@ -9,7 +9,6 @@ import { CompanyRestService } from 'src/app/services/companyRest/company-rest.se
 })
 export class NavbarComponent implements OnInit {
   token:any;
-  /*identity:any; */
 
   constructor(
     private companyRest: CompanyRestService,
@@ -18,15 +17,12 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = this.companyRest.getToken();
-    /*
-    this.identity = this.companyRest.getIdentity().role == 'COMPANY';
-    */
   }
-  /*
+  
   logOut(){
     localStorage.removeItem('token')
     localStorage.removeItem('identity')
     this.router.navigateByUrl('/login');
   }
-*/
+
 }
