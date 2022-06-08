@@ -9,6 +9,7 @@ exports.pruebaEmpresa = async (req, res) => {
     await res.send({ message: 'Controller run' });
 }
 
+/*
 exports.saveEmpresa = async (req, res) => {
     try {
         const params = req.body;
@@ -24,7 +25,6 @@ exports.saveEmpresa = async (req, res) => {
             let empresaExist = await searchComany(params.name);
             if (!empresaExist) {
                 data.password = await encrypt(params.password);
-
                 let empresa = new Empresa(data);
                 await empresa.save();
                 return res.send({ message: 'Company Saved' })
@@ -40,6 +40,35 @@ exports.saveEmpresa = async (req, res) => {
         return res.status(500).send({ err, message: 'Error saving' })
     }
 }
+*/
+
+exports.saveEmpresa = async (req, res) => {
+
+    try {
+        const params = req.body;
+        let data = {
+            name: params.name,
+            typeOfCompany: params.typeOfCompany,
+            town: params.town,
+            password: params.password,
+            role: 'COMPANY'
+        }
+        let msg = validateData(data);
+        if (msg) return res.status(400).send(msg);
+        let already = await searchComany(data.name);
+        if (already) return res.status(400).send({ message: 'Company en uso' });
+        data.email = params.email;
+        data.password = params.password;
+        let empresa = new Empresa(data)
+        await empresa.save();
+        return res.send({ message: 'Company creado' });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send({ err, message: 'Error saving Company' })
+    }
+
+}
+
 
 exports.loginCompany = async (req, res) => {
     try {
@@ -51,7 +80,8 @@ exports.loginCompany = async (req, res) => {
         let msg = validateData(data);
 
         if (msg) return res.status(400).send(msg);
-        let alreadyEmpresa = await searchComany(params.name);
+        let alreadyEmpresa = await searchComany(data.name);
+        
         if (alreadyEmpresa && await checkPass(data.password, alreadyEmpresa.password)) {
             let token = await jwt.createToken(alreadyEmpresa);
             delete alreadyEmpresa.password;
@@ -181,7 +211,13 @@ exports.getCompanyId = async(req,res)=>{
     try{
         const idCompany = req.params.id;  
         const company = await Empresa.findOne({_id: idCompany});
-        return res.send({message: 'Company Found' , company});
+        
+        if(!company){
+            return res.send({message: 'Compañia no encontrada'})
+        } else{
+            return res.send({message: 'Usuario encontrado', company})
+        }
+
     }catch(err){
         console.log(err); 
         return res.status().send('Error Get Company Id'); 

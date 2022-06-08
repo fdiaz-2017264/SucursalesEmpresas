@@ -23,15 +23,17 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  login(){
+  login(loginForm:any){
     this.companyRest.login(this.company).subscribe({
        next: (res:any)=>{
           alert(res.message);
           localStorage.setItem('token', res.token);
           localStorage.setItem('identity', JSON.stringify(res.alreadyEmpresa));
-          this.router.navigateByUrl('/home');
+          this.router.navigateByUrl('/');
        },
-       error: (err)=> alert(err.error.message || err.error)
-    })
+       error: (err)=> {
+          alert(err.error.message || err.error)
+        }
+    } )
  }
 }

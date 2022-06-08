@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CompanyModel } from 'src/app/models/company.model';
 import { CompanyRestService } from 'src/app/services/companyRest/company-rest.service';
 
@@ -11,9 +12,10 @@ export class ViewCompanyComponent implements OnInit {
   company: CompanyModel;
 
 
-  constructor( private companyRest:CompanyRestService) 
-  
-  {
+  constructor(
+     private companyRest:CompanyRestService,
+     public router: Router
+     ){
     this.company = new CompanyModel('','','','','','')
    }
 
