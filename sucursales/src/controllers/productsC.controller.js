@@ -15,6 +15,7 @@ exports.saveProduct = async (req, res) => {
             stock: params.stock,
             company: req.user.sub
         }
+        if(params.stock <0)  return res.status(403).send({ message: ' Enter a positive value' });
         const already = await ProductsC.findOne({nameProduct: params.nameProduct, company: data.company});
         if(already) return res.status(400).send({message: 'Product already'});
         let msg = validateData(data);
@@ -51,6 +52,7 @@ exports.updateProduct = async (req, res) => {
         const product = await ProductsC.findOne({ _id: productId });
         const params = req.body
         if (Object.entries(params).length === 0) return res.status(400).send({ message: 'No parameters to update,enter one' });
+        if(params.stock <0)  return res.status(403).send({ message: ' Enter a positive value' });
         if (product.company != req.user.sub) return res.status(403).send({ message: 'You do not have permission to update this product' });
         const check = await ProductsC.find({ company: req.user.sub });
         if (!check) return res.status(500).send({ message: 'Action not authorized' });
