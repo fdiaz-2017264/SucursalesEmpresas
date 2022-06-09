@@ -10,6 +10,7 @@ import { ViewCompanyComponent } from './components/view-company/view-company.com
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
+  {path: 'home', component: HomeComponent}, /* Quitar*/
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'offices', component: BranchOfficeComponent},
