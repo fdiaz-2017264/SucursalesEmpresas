@@ -7,6 +7,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ProductsComponent } from './components/products/products.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ViewCompanyComponent } from './components/view-company/view-company.component';
+import {PsucursalesComponent} from './components/psucursales/psucursales.component';
+
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -16,7 +18,9 @@ const routes: Routes = [
   {path: 'offices', component: BranchOfficeComponent},
   {path:  'view-company', component: ViewCompanyComponent},
   {path: 'productsCompany', component: ProductsComponent},
+  {path: 'officeProduct', component: PsucursalesComponent},
   {path: '**', component: NotFoundComponent}
+
 ];
 
 @NgModule({
