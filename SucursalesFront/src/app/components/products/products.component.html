@@ -1,12 +1,12 @@
 <app-navbar></app-navbar>
 
 <div  class="card text-center  bg-white border-white m-5">
-    <h4 [(ngModel)]="company.name" name="name" class="card-title" style="text-align: center;margin-top: 3%;color: rgb(0, 0, 0);">{{company.name}}</h4>
+    <h4 [(ngModel)]="company.name" name="name" class="card-title" style="text-align: center;margin-top: 3%;color: rgb(0, 0, 0);">- {{company.name}} -</h4>
     <hr style="margin-left: 10%;margin-right: 10%; background-color: rgb(0, 0, 0);">
 
     <div class="card-body">
         <img src="https://images.adsttc.com/media/images/57fd/1c50/e58e/ce3f/c600/0190/large_jpg/The_Tower_at_Dubai_Creek_Harbour_(6)_Credit_Santiago_Calatrava.jpg?1476205643"
-            width="300" />
+            width="300" class="img-fluid"/>
         <hr class="text-primary">
         <h4 class="card-title justify-content-center text-primary">Products</h4>
         <hr class="text-primary">
@@ -19,7 +19,7 @@
 </div>
 
 
-<div class="text-center" style="margin-left: 8%;margin-right: 8%; margin-top: -3%;">
+<div class="text-center table-responsive" style="margin-left: 8%;margin-right: 8%; margin-top: -3%;">
     <table class="table table-dark">
         <thead>
             <tr>
