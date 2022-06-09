@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductSRestService } from 'src/app/services/productS/product-srest.service';
 
 @Component({
   selector: 'app-psucursales',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PsucursalesComponent implements OnInit {
 
-  constructor() { }
+  products: any
+  constructor(
+    private producS: ProductSRestService
+  ) { }
 
   ngOnInit(): void {
+    this.getProductS()
+
   }
 
+  getProductS(){
+    this.producS.getProducSs().subscribe({
+      next: (res:any)=> this.products=res.productS,
+      error: (err)=> console.log(err)
+    })    
+  }
 }
