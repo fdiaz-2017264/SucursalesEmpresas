@@ -10,17 +10,10 @@ export class AppComponent  implements OnInit{
   title = 'SucursalesFront';
 
   constructor(
-    private producS: ProductSRestService
   ){}
 
   ngOnInit(): void {
-    this.getProductS()
   }
   
-  getProductS(){
-    this.producS.getProducSs().subscribe({
-      next: (res:any)=> console.log(res),
-      error: (err)=> console.log(err)
-    })    
-  }
+  
 }
