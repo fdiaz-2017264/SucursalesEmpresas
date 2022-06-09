@@ -34,6 +34,9 @@ export class CompanyRestService {
     return this.http.put(environment.baseUrl + 'empresa/updateCompany/' + id, params, {headers: this.httpOptions});
   }
 
+  deleteCompany(id:string){
+    return this.http.delete(environment.baseUrl + 'empresa/deleteCompany/' + id, {headers: this.httpOptions});
+  }
 
 
     
