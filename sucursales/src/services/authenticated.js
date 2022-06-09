@@ -25,8 +25,8 @@ exports.ensureAuth = async (req, res, next) =>{
 exports.isAdmin = async (req, res, next) =>{
     try{
         const user = req.user;
-        if(user.role === 'COMPANY') return next();
-        else return res.status(403).send({message: 'User unauthorized'});
+        if(user.role === 'ADMIN') return next();
+        else return res.status(403).send({message: 'COMPANY unauthorized'});
     }catch(err){
         console.log(err);
         return err;
@@ -37,7 +37,7 @@ exports.admin = async (req, res, next) =>{
     try{
         const user = req.user;
         if(user.role === 'ADMIN') return next();
-        else return res.status(403).send({message: 'User unauthorized'});
+        else return res.status(403).send({message: 'Comapany unauthorized'});
     }catch(err){
         console.log(err);
         return err;

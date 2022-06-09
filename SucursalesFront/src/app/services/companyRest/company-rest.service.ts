@@ -29,6 +29,13 @@ export class CompanyRestService {
   getIdCompany(id: string){
     return this.http.get(environment.baseUrl + 'empresa/getIdCompany/'+ id, {headers: this.httpOptions});
   }
+
+  updateCompany(id: string, params: {}){
+    return this.http.put(environment.baseUrl + 'empresa/updateCompany/' + id, params, {headers: this.httpOptions});
+  }
+
+
+
     
   getToken(){
     let globalToken = localStorage.getItem('token');

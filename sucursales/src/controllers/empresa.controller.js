@@ -112,6 +112,7 @@ exports.deleteCompany = async (req, res) => {
     }
 }
 
+/*
 exports.updateCompany = async (req, res) => {
     try {
         const empresaId = req.params.id;
@@ -124,12 +125,50 @@ exports.updateCompany = async (req, res) => {
         if(permission === false) return res.status(401).send({message: 'Insuficient Permission'});
         const empresaUpdate = await Empresa.findOneAndUpdate({ _id: empresaId }, params, { new: true });
         if (!empresaUpdate) return res.send({ message: 'Company not found or not updated' });
-        return res.send({ message: 'Company Updated', empresaUpdate });
+        return res.send({ message: 'Company Updated'});
     } catch (err) {
         console.log(err);
         return res.status(500).send({ message: 'Error actualizando' })
     }
 }
+*/
+
+
+exports.updateCompany = async(req,res)=>{
+    try{
+        const params = req.body; 
+        const idCompany = req.params.id; 
+
+        const companyExist = await Empresa.findOne({_id: idCompany})
+        if(!companyExist)
+        return res.send({ message: 'Comany no encontrado' })
+        const access = await checkPermission(idCompany, req.user.sub); 
+        if(access === false)
+            return res.status(401).send({message: 'Usuario no autorizado' });
+
+        const validateUp = await checkUpdatEmpresa(params);
+        if(validateUp === false)
+            return res.status(400).send({message: 'Parametros invaldos o no tienes autorización'})
+
+         let nameCompany = await searchComany(params.name); 
+         if(nameCompany && companyExist.name != params.name) 
+             return res.send({ message: 'Company en uso' }); 
+
+        const updateCompany = await Empresa.findOneAndUpdate({_id: idCompany}, params, {new: true}).lean();
+        if(updateCompany){
+            res.send({ updateCompany, message: 'Usuario actualizado' });
+        }else{
+            return res.send({ message: 'Usuario no actualizado' });
+        }
+
+    }catch(err){
+        console.log(err); 
+        return res.status(500).send({ err, message: 'Failed to update Company' })
+    }
+}
+
+
+
 
 exports.createAdmin = async (req, res) => {
     try {

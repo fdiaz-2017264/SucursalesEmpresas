@@ -10,6 +10,7 @@ import { CompanyRestService } from 'src/app/services/companyRest/company-rest.se
 })
 export class ViewCompanyComponent implements OnInit {
   company: CompanyModel;
+  baseUpdate:any;
 
 
   constructor(
@@ -23,13 +24,58 @@ export class ViewCompanyComponent implements OnInit {
     this.getCompany();
   }
 
-
+/*
   getCompany(){
     this.companyRest.getIdCompany(this.companyRest.getIdentity()._id).subscribe({
       next: (res:any) =>{this.company = res.company},
       error: (err)=> alert(err.error.message)
     })
   }
+
+*/
+
+
+
+  /*
+update(){
+  this.baseUpdate.password = undefined; 
+  this.baseUpdate.role = undefined; 
+  this.companyRest.update(this.baseUpdate._id, this.baseUpdate).subscribe({
+    next: (res:any)=>{
+      this.company = res.company
+      this.getCompany();
+    },
+    error: (err)=> alert(err.error.message)
+  })
+  }
+  */
+
+  update(){
+    this.baseUpdate.role = undefined; 
+    this.companyRest.updateCompany(this.baseUpdate._id, this.baseUpdate).subscribe({
+      next: (res: any) => this.company = res.company,
+      error: (err)=> alert(err.error.message)
+    })
+  }
+
+
+
+  getCompany(){
+    this.companyRest.getIdCompany(this.companyRest.getIdentity()._id).subscribe({
+      next: (res: any) => this.baseUpdate = res.company,
+      error: (err)=> alert(err.error.message)
+    })
+  }
+
+
+
+
+
+
+
+
+
 }
+
 
 
