@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CompanyModel } from 'src/app/models/company.model';
 import { CompanyRestService } from 'src/app/services/companyRest/company-rest.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -23,15 +24,31 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  login(){
-    this.companyRest.login(this.company).subscribe({
-       next: (res:any)=>{
-          alert(res.message);
-          localStorage.setItem('token', res.token);
-          localStorage.setItem('identity', JSON.stringify(res.alreadyEmpresa));
-          this.router.navigateByUrl('/home');
-       },
-       error: (err)=> alert(err.error.message || err.error)
-    })
+  /*---------------Login Teminado------------------------*/
+ login(loginForm:any){
+  this.companyRest.login(this.company).subscribe({
+    next: (res:any)=>{
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Logeado',
+        showConfirmButton: false,
+        timer: 1000
+      })
+      localStorage.setItem('token', res.token);
+      localStorage.setItem('identity', JSON.stringify(res.alreadyEmpresa));
+      this.router.navigateByUrl('/');
+    },
+    error: (err)=>{
+      loginForm.reset();
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Name o Password incorrecto',
+        showConfirmButton: false,
+        timer: 1000
+      })
+    }
+  })
  }
 }

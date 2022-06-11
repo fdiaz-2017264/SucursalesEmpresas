@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CompanyModel } from 'src/app/models/company.model';
 import { CompanyRestService } from 'src/app/services/companyRest/company-rest.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -11,8 +12,28 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   company: CompanyModel;
-
-
+  towns: any[] = [
+    'Alta Verapaz',
+    'Baja Verapaz',
+    'Chiquimula',
+    'Peten',
+    'El Progreso',
+    'Quiché',
+    'Escuintla',
+    'Guatemala',
+    'Izabal',
+    'Jalapa',
+    'Jutiapa',
+    'Quetzaltenango',
+    'Retalhuleu',
+    'Sacatepéquez',
+    'San Marcos',
+    'Santa Rosa',
+    'Solola',
+    'Totonicapán',
+    'Zacapa',
+  ];
+ 
   constructor(
     private comanyRest: CompanyRestService,
     private router: Router
@@ -26,27 +47,13 @@ export class RegisterComponent implements OnInit {
   }
 
 
-  register(registerForm:any){
-    this.comanyRest.register(this.company).subscribe({
-      next: (responsive:any) =>{
-        alert(responsive.message);
-        return this.router.navigateByUrl('/login');
-      },  
-      error: (err) =>{
-        registerForm.reset();
-        return alert(err.error.message || err.error); 
-      }
-    })
-  }
-  
 
-/*
-
-  register(registerForm:any){
+/*-----------------------Register Terminado----------------*/
+register(registerForm:any){
     this.comanyRest.register(this.company).subscribe({
       next: (res:any)=>{
         Swal.fire({
-          position: 'top-end',
+          position: 'center',
           title: res.message,
           icon: 'success',
           showConfirmButton: false,
@@ -68,6 +75,6 @@ export class RegisterComponent implements OnInit {
     })
   }
 
-  */
+
   
 }

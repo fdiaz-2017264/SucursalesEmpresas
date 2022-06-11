@@ -9,6 +9,7 @@ exports.pruebaEmpresa = async (req, res) => {
     await res.send({ message: 'Controller run' });
 }
 
+/*
 exports.saveEmpresa = async (req, res) => {
     try {
         const params = req.body;
@@ -24,7 +25,6 @@ exports.saveEmpresa = async (req, res) => {
             let empresaExist = await searchComany(params.name);
             if (!empresaExist) {
                 data.password = await encrypt(params.password);
-
                 let empresa = new Empresa(data);
                 await empresa.save();
                 return res.send({ message: 'Company Saved' })
@@ -40,6 +40,35 @@ exports.saveEmpresa = async (req, res) => {
         return res.status(500).send({ err, message: 'Error saving' })
     }
 }
+*/
+
+exports.saveEmpresa = async (req, res) => {
+
+    try {
+        const params = req.body;
+        let data = {
+            name: params.name,
+            typeOfCompany: params.typeOfCompany,
+            town: params.town,
+            password: params.password,
+            role: 'COMPANY'
+        }
+        let msg = validateData(data);
+        if (msg) return res.status(400).send(msg);
+        let already = await searchComany(data.name);
+        if (already) return res.status(400).send({ message: 'Company en uso' });
+        data.email = params.email;
+        data.password = params.password;
+        let empresa = new Empresa(data)
+        await empresa.save();
+        return res.send({ message: 'Company creado' });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send({ err, message: 'Error saving Company' })
+    }
+
+}
+
 
 exports.loginCompany = async (req, res) => {
     try {
@@ -51,7 +80,8 @@ exports.loginCompany = async (req, res) => {
         let msg = validateData(data);
 
         if (msg) return res.status(400).send(msg);
-        let alreadyEmpresa = await searchComany(params.name);
+        let alreadyEmpresa = await searchComany(data.name);
+        
         if (alreadyEmpresa && await checkPass(data.password, alreadyEmpresa.password)) {
             let token = await jwt.createToken(alreadyEmpresa);
             delete alreadyEmpresa.password;
@@ -82,6 +112,7 @@ exports.deleteCompany = async (req, res) => {
     }
 }
 
+/*
 exports.updateCompany = async (req, res) => {
     try {
         const empresaId = req.params.id;
@@ -94,12 +125,50 @@ exports.updateCompany = async (req, res) => {
         if(permission === false) return res.status(401).send({message: 'Insuficient Permission'});
         const empresaUpdate = await Empresa.findOneAndUpdate({ _id: empresaId }, params, { new: true });
         if (!empresaUpdate) return res.send({ message: 'Company not found or not updated' });
-        return res.send({ message: 'Company Updated', empresaUpdate });
+        return res.send({ message: 'Company Updated'});
     } catch (err) {
         console.log(err);
         return res.status(500).send({ message: 'Error actualizando' })
     }
 }
+*/
+
+
+exports.updateCompany = async(req,res)=>{
+    try{
+        const params = req.body; 
+        const idCompany = req.params.id; 
+
+        const companyExist = await Empresa.findOne({_id: idCompany})
+        if(!companyExist)
+        return res.send({ message: 'Comany no encontrado' })
+        const access = await checkPermission(idCompany, req.user.sub); 
+        if(access === false)
+            return res.status(401).send({message: 'Usuario no autorizado' });
+
+        const validateUp = await checkUpdatEmpresa(params);
+        if(validateUp === false)
+            return res.status(400).send({message: 'Parametros invaldos o no tienes autorización'})
+
+         let nameCompany = await searchComany(params.name); 
+         if(nameCompany && companyExist.name != params.name) 
+             return res.send({ message: 'Company en uso' }); 
+
+        const updateCompany = await Empresa.findOneAndUpdate({_id: idCompany}, params, {new: true}).lean();
+        if(updateCompany){
+            res.send({ updateCompany, message: 'Usuario actualizado' });
+        }else{
+            return res.send({ message: 'Usuario no actualizado' });
+        }
+
+    }catch(err){
+        console.log(err); 
+        return res.status(500).send({ err, message: 'Failed to update Company' })
+    }
+}
+
+
+
 
 exports.createAdmin = async (req, res) => {
     try {
@@ -181,7 +250,13 @@ exports.getCompanyId = async(req,res)=>{
     try{
         const idCompany = req.params.id;  
         const company = await Empresa.findOne({_id: idCompany});
-        return res.send({message: 'Company Found' , company});
+        
+        if(!company){
+            return res.send({message: 'Compañia no encontrada'})
+        } else{
+            return res.send({message: 'Usuario encontrado', company})
+        }
+
     }catch(err){
         console.log(err); 
         return res.status().send('Error Get Company Id'); 
