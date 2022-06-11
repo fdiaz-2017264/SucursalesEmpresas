@@ -5,6 +5,7 @@ import { CompanyModel } from 'src/app/models/company.model';
 import { CompanyRestService } from 'src/app/services/companyRest/company-rest.service';
 import { ProductSRestService } from 'src/app/services/productS/product-srest.service';
 import { ProductSsModel } from 'src/app/models/prodctS.model';
+import { OfficeServiceService } from 'src/app/services/OfficeService/office-service.service'
 
 @Component({
   selector: 'app-products',
@@ -18,21 +19,24 @@ export class ProductsComponent implements OnInit {
   company: CompanyModel;
   value: any = [];
   productModel: ProductSsModel;
+  offices: any
 
   constructor(
     private productRest: ProductRestService,
     private companyRest: CompanyRestService,
-    private productSRes: ProductSRestService
+    private productSRes: ProductSRestService,
+    private officeRest: OfficeServiceService
   ) {
     this.product = new ProductsModel('', '', 0, '');
     this.company = new CompanyModel('', '', '', '', '', '');
-    this.productModel = new ProductSsModel('', 0 , '', '');
-    
+    this.productModel = new ProductSsModel('','risitos', 0, 0, '');
+
   }
 
   ngOnInit(): void {
     this.getProducts();
     this.getCompany();
+    this.getOffices();
   }
 
   getCompany() {
@@ -88,13 +92,22 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  exportProduct(){
+
+  getOffices() {
+    this.officeRest.getOffices().subscribe({
+      next: (res: any) => this.offices = res.branchOffices,
+      error: (err) => alert(err.error.message)
+    })
+  }
+
+  exportProduct() {
     this.productSRes.saveProduct(this.productU._id, this.productModel).subscribe({
-      next: (res: any)=>{
-        alert(res.productoS)
+      next: (res: any) => {
+        alert('Product Saved')
+        this.getProducts();
       },
-      error: (err) => console.log(err.error.message),
-    
+      error: (err) => console.log(err),
+
     })
   }
 }
