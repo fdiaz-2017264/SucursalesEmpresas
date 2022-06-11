@@ -10,10 +10,13 @@
       <ul class="navbar-nav me-auto">
 <!--Agregado-->
         <li class="nav-item">
-          <a class="nav-link" routerLink="/productsCompany">Products</a>
+          <a class="nav-link" routerLink="/productsCompany" *ngIf="identity == 'COMPANY'">Products</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/offices">Offices</a>
+          <a class="nav-link" routerLink="/users" *ngIf="identity == 'ADMIN'">Users</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/offices" *ngIf="identity == 'COMPANY'">Offices</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"

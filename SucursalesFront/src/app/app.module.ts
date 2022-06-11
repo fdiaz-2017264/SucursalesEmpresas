@@ -15,8 +15,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ViewCompanyComponent } from './components/view-company/view-company.component';
 import { FormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import { AdminComponent } from './components/admin/admin.component';
 import { SearchPipe } from './pipes/search.pipe';
+import { UsersComponent } from './components/users/users.component';
 
 
 
@@ -33,6 +33,7 @@ import { SearchPipe } from './pipes/search.pipe';
     ProductsComponent,
     NotFoundComponent,
     ViewCompanyComponent,
+    UsersComponent,
   ],
   imports: [
     BrowserModule,

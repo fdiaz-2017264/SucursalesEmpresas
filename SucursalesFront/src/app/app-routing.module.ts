@@ -9,6 +9,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { ViewCompanyComponent } from './components/view-company/view-company.component';
 import {PsucursalesComponent} from './components/psucursales/psucursales.component';
 import { UserGuard } from './guards/user.guard';
+import { AdminGuard } from './guards/admin.guard';
+import { UsersComponent } from './components/users/users.component';
 
 
 const routes: Routes = [
@@ -20,6 +22,7 @@ const routes: Routes = [
   {path: 'view-company', canActivate: [UserGuard], component: ViewCompanyComponent},
   {path: 'productsCompany', canActivate: [UserGuard], component: ProductsComponent},
   {path: 'officeProduct/:id', canActivate: [UserGuard], component: PsucursalesComponent},
+  {path: 'users', canActivate: [AdminGuard], component: UsersComponent},
   {path: '**', component: NotFoundComponent}
 
 ];

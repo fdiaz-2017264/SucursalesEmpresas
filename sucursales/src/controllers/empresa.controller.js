@@ -145,7 +145,7 @@ exports.deleteAdminCompany = async (req, res) => {
         if (!searchCompany) return res.status(404).send({ message: 'Company not found or already deleted' })
 
         if (!searchComany) return res.send({ message: 'Insuficient permissions' });
-        if (searchCompany.role === 'ADMIN') return res.send({ message: 'Cannot delete company' });
+        if (searchCompany.role === 'ADMIN') return res.status(403).send({ message: 'Action not allowed' });
         const companyDeleted = await Empresa.findOneAndDelete({ _id: searchComany });
         await Sucursal.findOneAndDelete({idEmpresa: searchComany});
         if (!companyDeleted) return res.send({ message: 'Insuficient permissions' });
@@ -225,7 +225,7 @@ exports.updateAdminCompany = async (req, res) => {
         const companyParams = await checkUpdateAdmin(params);
 
         if (companyParams === false) return res.send({ message: 'Params not received' });
-        if (searchCompany.role === 'ADMIN') return res.send({ message: 'Action not allowed' });
+        if (searchCompany.role === 'ADMIN') return res.status(403).send({ message: 'Action not allowed' });
 
         const nameCompany = await searchComany(params.name);
         if (nameCompany && searchCompany.name != params.name) return res.send({ message: 'Name in use' });
