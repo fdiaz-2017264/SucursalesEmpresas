@@ -12,8 +12,28 @@ import Swal from 'sweetalert2';
 })
 export class RegisterComponent implements OnInit {
   company: CompanyModel;
-
-
+  towns: any[] = [
+    'Alta Verapaz',
+    'Baja Verapaz',
+    'Chiquimula',
+    'Peten',
+    'El Progreso',
+    'Quiché',
+    'Escuintla',
+    'Guatemala',
+    'Izabal',
+    'Jalapa',
+    'Jutiapa',
+    'Quetzaltenango',
+    'Retalhuleu',
+    'Sacatepéquez',
+    'San Marcos',
+    'Santa Rosa',
+    'Solola',
+    'Totonicapán',
+    'Zacapa',
+  ];
+ 
   constructor(
     private comanyRest: CompanyRestService,
     private router: Router
@@ -25,6 +45,8 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+
 
 /*-----------------------Register Terminado----------------*/
 register(registerForm:any){
