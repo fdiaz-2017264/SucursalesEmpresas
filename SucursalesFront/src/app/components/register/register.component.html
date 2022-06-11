@@ -38,14 +38,43 @@
     </div>
 
 
-    <div class="form-outline mb-4">
-      <span *ngIf="!town.valid && town.touched" style="color: rgb(247, 126, 40);">
-        Required Field
-    </span>
-      <input [(ngModel)]="company.town" name="town" type="text" #town="ngModel" id="form3Example1m1" class="form-control"
-        placeholder="Ej: ejemplo" required/>
-      <label class="form-label">Town</label>
-    </div>
+    <select [(ngModel)]="company.town" name="town" type="text" #town="ngModel" class="form-select" aria-label="Default select example">      
+      <option>Alta Verapaz</option>
+      <option>Baja Verapaz.</option>
+      <option>Chiquimula</option>
+      <option>Petén</option>
+      <option>El Progreso</option>
+      <option>El Quiché</option>
+      <option>Escuintla</option>
+      <option>Guatemala</option>
+      <option>Izabal</option>
+      <option>Jalapa</option>
+      <option>Jutiapa</option>
+      <option>Quetzaltenango</option>
+
+      <option>Retalhuleu</option>
+      <option>Sacatepéquez</option>
+      <option>San Marcos</option>
+      <option>Santa Rosa</option>
+      <option>San Marcos</option>
+      <option>Solola</option>
+      <option>Totonicapán.</option>
+      <option>Zacapa</option>
+    </select>
+    <label class="form-label">Town</label>
+    <br>
+
+
+  
+
+
+
+
+
+
+
+
+
 
     <div class="form-outline mb-2">
       <span *ngIf="!password.valid && password.touched" style="color: rgb(247, 126, 40);">
