@@ -57,8 +57,10 @@ exports.createProduct = async (req, res) => {
 
 exports.getProduct = async(req, res) =>{
   try{
-    const productS = await ProductoS.find().sort({stock: -1})
-    return res.send({message: 'Products Found:', productS});
+    const productS = await ProductoS.find({}).sort({stock: -1})
+    const name = await ProductoS.find().select('-_id name');
+    const stock = await ProductoS.find().select('-_id stock');
+    return res.send({message: 'Products Found:', productS, name, stock});
   }catch(err){
     console.log(err);
         return err;
