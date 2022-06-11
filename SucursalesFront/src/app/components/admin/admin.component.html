@@ -1,0 +1,55 @@
+<app-navbar></app-navbar>
+
+<div>
+  <div class="m-3 position-relative">
+    <p class="m-1 fs-2">Diazn't</p>
+
+    <div class="img-fluid m-2">
+      <p class="text-center fs-1">Company</p>
+      
+
+    </div>
+
+  </div>
+  <hr>
+
+  <button type="button" class="btn btn-outline-danger m-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-graph-up-arrow "
+      viewBox="0 0 16 16">
+      <path fill-rule="evenodd"
+        d="M0 0h1v15h15v1H0V0Zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5Z">
+      </path>
+    </svg>
+    See Graph
+  </button>
+
+
+  <div class="m-4 text-center table-responsive">
+    <table class="table table-dark table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Type Of Company</th>
+          <th scope="col">town</th>
+          <th scope="col">role</th>
+          <th scope="col">actions</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor=" let i = index">
+          <th scope="row">{{i+1 }}</th>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+  </div>
+
+  <app-footer></app-footer>
