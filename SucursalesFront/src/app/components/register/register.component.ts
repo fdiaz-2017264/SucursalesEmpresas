@@ -66,7 +66,7 @@ register(registerForm:any){
         return Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Hubo un error creando la cuenta',
+          text: err.message,
           showConfirmButton: false,
           timer: 1000
         })

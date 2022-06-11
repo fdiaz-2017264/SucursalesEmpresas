@@ -14,6 +14,9 @@ api.post('/loginCompany',empresaController.loginCompany);
 api.delete('/deleteCompany/:id', [mdAuth.ensureAuth, mdAuth.isAdmin],empresaController.deleteCompany);
 api.put('/updateCompany/:id',[mdAuth.ensureAuth, mdAuth.isAdmin], empresaController.updateCompany);
 
+//Account 
+api.put('/updateAccount', [mdAuth.ensureAuth], empresaController.updateAccount);
+api.delete('/deleteAccount', [mdAuth.ensureAuth], empresaController.deleteAccount);
 
 /*This*/
 api.post('/adminCompany', [mdAuth.ensureAuth,mdAuth.admin], empresaController.adminComany);

@@ -8,17 +8,18 @@ import { ProductsComponent } from './components/products/products.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ViewCompanyComponent } from './components/view-company/view-company.component';
 import {PsucursalesComponent} from './components/psucursales/psucursales.component';
+import { UserGuard } from './guards/user.guard';
 
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'home', component: HomeComponent},
+  {path: '', canActivate: [UserGuard], component: HomeComponent},
+  {path: 'home', canActivate: [UserGuard], component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'offices', component: BranchOfficeComponent},
-  {path: 'view-company', component: ViewCompanyComponent},
-  {path: 'productsCompany', component: ProductsComponent},
-  {path: 'officeProduct/:id', component: PsucursalesComponent},
+  {path: 'offices', canActivate: [UserGuard], component: BranchOfficeComponent},
+  {path: 'view-company', canActivate: [UserGuard], component: ViewCompanyComponent},
+  {path: 'productsCompany', canActivate: [UserGuard], component: ProductsComponent},
+  {path: 'officeProduct/:id', canActivate: [UserGuard], component: PsucursalesComponent},
   {path: '**', component: NotFoundComponent}
 
 ];

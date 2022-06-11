@@ -58,7 +58,8 @@ exports.saveEmpresa = async (req, res) => {
         let already = await searchComany(data.name);
         if (already) return res.status(400).send({ message: 'Company en uso' });
         data.email = params.email;
-        data.password = params.password;
+        data.password =await encrypt(params.password);
+
         let empresa = new Empresa(data)
         await empresa.save();
         return res.send({ message: 'Company creado' });
@@ -81,7 +82,7 @@ exports.loginCompany = async (req, res) => {
 
         if (msg) return res.status(400).send(msg);
         let alreadyEmpresa = await searchComany(data.name);
-        
+        console.log(data.password)
         if (alreadyEmpresa && await checkPass(data.password, alreadyEmpresa.password)) {
             let token = await jwt.createToken(alreadyEmpresa);
             delete alreadyEmpresa.password;
@@ -287,5 +288,55 @@ exports.updateAdminCompany = async(req,res)=>{
     } catch(err){
         console.log(err); 
         return res.status(500).send('Error Updating');
+    }
+}
+
+//------------------------- Account ------------------------------
+
+
+exports.deleteAccount = async (req, res) => {
+    try {
+        const empresaId = req.user.sub;
+        const permission = await checkPermission(empresaId, req.user.sub);
+        if (permission == false) return res.status(403).send({ message: 'Insuficient permissions' });
+        const companyDeleted = await Empresa.findOneAndDelete({ _id: empresaId });
+        if (companyDeleted) return res.send({ message: 'Deleted', companyDeleted });
+        return res.send({ message: 'Not found or already deleted' });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send({ err, message: 'Error deleting' });
+    }
+}
+
+exports.updateAccount = async(req,res)=>{
+    try{
+        const params = req.body; 
+        const idCompany = req.user.sub; 
+
+        const companyExist = await Empresa.findOne({_id: idCompany})
+        if(!companyExist)
+        return res.send({ message: 'Not found' })
+        const access = await checkPermission(idCompany, req.user.sub); 
+        if(access === false)
+            return res.status(401).send({message: 'Unauthorized' });
+
+        const validateUp = await checkUpdatEmpresa(params);
+        if(validateUp === false)
+            return res.status(400).send({message: 'Invalid Params'})
+
+         let nameCompany = await searchComany(params.name); 
+         if(nameCompany && companyExist.name != params.name) 
+             return res.send({ message: 'Name in use' }); 
+
+        const updateCompany = await Empresa.findOneAndUpdate({_id: idCompany}, params, {new: true}).lean();
+        if(updateCompany){
+            res.send({ updateCompany, message: 'Updated' });
+        }else{
+            return res.send({ message: 'Company not updated' });
+        }
+
+    }catch(err){
+        console.log(err); 
+        return res.status(500).send({ err, message: 'Failed to update Company' })
     }
 }

@@ -38,6 +38,14 @@ export class CompanyRestService {
     return this.http.delete(environment.baseUrl + 'empresa/deleteCompany/' + id, {headers: this.httpOptions});
   }
 
+  updateAccount(params:{}){
+    return this.http.put(environment.baseUrl + 'empresa/updateAccount', params, {headers: this.httpOptions});
+  }
+
+  deleteAccount(){
+    return this.http.delete(environment.baseUrl + 'empresa/deleteAccount', {headers: this.httpOptions});
+  }
+
 
     
   getToken(){

@@ -3,6 +3,7 @@ import { ProductSRestService } from 'src/app/services/productS/product-srest.ser
 import { ChartType } from 'chart.js'
 import { ActivatedRoute } from '@angular/router';
 import { OfficeServiceService } from 'src/app/services/OfficeService/office-service.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-psucursales',
@@ -43,7 +44,13 @@ export class PsucursalesComponent implements OnInit {
   getOffice(){
     this.officeRest.getOffice(this.idOffice).subscribe({
       next: (res:any) => this.office = res.branchOffice,
-      error: (err) => alert(err.error.message || err.error)
+      error: (err) => Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: err.error.message,
+        showConfirmButton: false,
+        timer: 1000
+      })
     })
   }
 
@@ -56,7 +63,23 @@ export class PsucursalesComponent implements OnInit {
           this.value.push(parseInt(pd.stock))
         }
       },
-      error: (err) => console.log(err)
+      error: (err) => Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: err.error.message,
+        showConfirmButton: false,
+        timer: 1000
+      })
+    })
+  }
+
+  sell(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Selled',
+      showConfirmButton: false,
+      timer: 1000
     })
   }
 }

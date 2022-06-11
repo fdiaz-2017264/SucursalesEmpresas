@@ -38,7 +38,7 @@ exports.deleteProduct = async (req, res) => {
         if (product.company != req.user.sub) return res.status(403).send({ message: 'You dont have permission to delete this product' });
         const productDeleted = await ProductsC.findOneAndDelete({ _id: productId });
         if (!productDeleted) return res.send({ message: 'Product not found or already deleted' });
-        return res.send({ message: 'Product Deleted:', productDeleted });
+        return res.send({ message: 'Product Deleted', productDeleted });
 
     } catch (err) {
         console.log(err)

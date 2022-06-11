@@ -16,9 +16,9 @@
         <div *ngFor="let sc of offices">
             <div class="card"
                 style="background-image: url('https://thumbs.dreamstime.com/b/cielos-nocturnos-con-luces-y-puesta-de-sol-en-el-edificio-nueva-york-manhtattan-del-atardecer-skyline-ventana-edificios-214866977.jpg'); max-height: 30%; cursor: pointer;"
-                [routerLink]="['/officeProduct/'+sc._id]">
+                >
                 <div class="textos">
-                    <h3 class="text-white mb-3">{{sc.name}}</h3>
+                    <h3 class="text-white mb-3" [routerLink]="['/officeProduct/'+sc._id]">{{sc.name}}</h3>
                     <p class="text-white">{{sc.address}}</p>
                     <div class="position-absolute bottom-0 end-0 m-2">
                         <svg style="margin-right: 7%; cursor: pointer; color: #fff;" xmlns="http://www.w3.org/2000/svg"

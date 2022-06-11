@@ -20,7 +20,7 @@
                 <span *ngIf="!name.valid && name.touched" style="color: rgb(247, 126, 40);">
                     Required Field
             </span>
-                <input [(ngModel)]="company.password" name="password"  #name="ngModel" placeholder="Enter Company" required/>
+                <input [(ngModel)]="company.password" name="password" type="password"  #name="ngModel" placeholder="Enter Company" required/>
                 <label class="for-label" >Password</label>
             </div>
 

@@ -6,6 +6,7 @@ import { CompanyRestService } from 'src/app/services/companyRest/company-rest.se
 import { ProductSRestService } from 'src/app/services/productS/product-srest.service';
 import { ProductSsModel } from 'src/app/models/prodctS.model';
 import { OfficeServiceService } from 'src/app/services/OfficeService/office-service.service'
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-products',
@@ -29,7 +30,7 @@ export class ProductsComponent implements OnInit {
   ) {
     this.product = new ProductsModel('', '', 0, '');
     this.company = new CompanyModel('', '', '', '', '', '');
-    this.productModel = new ProductSsModel('','risitos', 0, 0, '');
+    this.productModel = new ProductSsModel('', 'risitos', 0, 0, '');
 
   }
 
@@ -46,14 +47,26 @@ export class ProductsComponent implements OnInit {
         next: (res: any) => {
           this.company = res.company;
         },
-        error: (err) => alert(err.error.message),
+        error: (err) => Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: err.error.message,
+          showConfirmButton: false,
+          timer: 1000
+        }),
       });
   }
 
   getProducts() {
     this.productRest.getProducts().subscribe({
-      next: (res: any) => (this.products = res.searchProduct),
-      error: (err) => console.log(err),
+      next: (res: any) => this.products = res.searchProduct,
+      error: (err) => Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: err.error.message,
+        showConfirmButton: false,
+        timer: 1000
+      }),
     });
   }
 
@@ -61,34 +74,79 @@ export class ProductsComponent implements OnInit {
     this.productRest.saveProduct(this.product).subscribe({
       next: (res: any) => {
         this.getProducts();
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: res.message,
+          showConfirmButton: false,
+          timer: 1000
+        })
         saveProductForm.reset();
       },
-      error: (err) => alert(err.error.message || err.error),
+      error: (err) => Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: err.error.message,
+        showConfirmButton: false,
+        timer: 1000
+      }),
     });
   }
 
   deleteProduct(id: string) {
     this.productRest.deleteProduct(id).subscribe({
       next: (res: any) => {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: res.message,
+          showConfirmButton: false,
+          timer: 1000
+        })
         this.getProducts();
       },
-      error: (err) => console.log(err),
+      error: (err) => Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: err.error.message,
+        showConfirmButton: false,
+        timer: 1000
+      }),
     });
   }
 
   getProduct(productId: string) {
     this.productRest.getProduct(productId).subscribe({
       next: (res: any) => (this.productU = res.searchProduct),
-      error: (err) => console.log(err),
+      error: (err) => Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: err.error.message,
+        showConfirmButton: false,
+        timer: 1000
+      }),
     });
   }
 
   updateProduct() {
     this.productRest.updateProduct(this.productU._id, this.productU).subscribe({
       next: (res: any) => {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: res.message,
+          showConfirmButton: false,
+          timer: 1000
+        })
         this.getProducts();
       },
-      error: (err) => console.log(err),
+      error: (err) => Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: err.error.message,
+        showConfirmButton: false,
+        timer: 1000
+      }),
     });
   }
 
@@ -96,17 +154,35 @@ export class ProductsComponent implements OnInit {
   getOffices() {
     this.officeRest.getOffices().subscribe({
       next: (res: any) => this.offices = res.branchOffices,
-      error: (err) => alert(err.error.message)
+      error: (err) => Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: err.error.message,
+        showConfirmButton: false,
+        timer: 1000
+      })
     })
   }
 
   exportProduct() {
     this.productSRes.saveProduct(this.productU._id, this.productModel).subscribe({
       next: (res: any) => {
-        alert('Product Saved')
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: res.message,
+          showConfirmButton: false,
+          timer: 1000
+        })
         this.getProducts();
       },
-      error: (err) => console.log(err),
+      error: (err) => Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: err.error.message,
+        showConfirmButton: false,
+        timer: 1000
+      }),
 
     })
   }
