@@ -18,12 +18,12 @@ export class ProductSRestService {
     private companyRest: CompanyRestService
   ) { }
 
-  getProducSs(){
-    return this.http.get(environment.baseUrl + 'productS/getProduct', {headers: this.httpOptions});
+  getProducSs(id:string){
+    return this.http.get(environment.baseUrl + 'productS/getProduct/'+id, {headers: this.httpOptions});
   }
 
   saveProduct(id: string, params:{}){
-    return this.http.post(environment.baseUrl + 'createProduct/' + id, params, {headers: this.httpOptions});
+    return this.http.post(environment.baseUrl + 'productS/createProduct/' + id, params, {headers: this.httpOptions});
   }
 
   

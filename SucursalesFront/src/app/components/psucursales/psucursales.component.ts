@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductSRestService } from 'src/app/services/productS/product-srest.service';
-import { BaseChartDirective } from 'ng2-charts';
-import { ChartData, ChartType } from 'chart.js'
+import { ChartType } from 'chart.js'
+import { ActivatedRoute } from '@angular/router';
+import { OfficeServiceService } from 'src/app/services/OfficeService/office-service.service';
 
 @Component({
   selector: 'app-psucursales',
@@ -13,15 +14,23 @@ export class PsucursalesComponent implements OnInit {
   products: any
   name:any = []
   value:any = []
+  idOffice:any
+  office:any
 
   constructor(
-    private producS: ProductSRestService
+    private producS: ProductSRestService,
+    private officeRest: OfficeServiceService,
+    public activatedRoute: ActivatedRoute
   ) {
 
   }
 
   ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe((id: any) => {
+      this.idOffice = id.get('id');
+    })
     this.getProductS();
+    this.getOffice();
   }
 
   public pieChartData = {
@@ -31,18 +40,21 @@ export class PsucursalesComponent implements OnInit {
     }]
   };
 
-
+  getOffice(){
+    this.officeRest.getOffice(this.idOffice).subscribe({
+      next: (res:any) => this.office = res.branchOffice,
+      error: (err) => alert(err.error.message || err.error)
+    })
+  }
 
   getProductS() {
-    this.producS.getProducSs().subscribe({
+    this.producS.getProducSs(this.idOffice).subscribe({
       next: (res: any) => {
         this.products = res.productS
-        console.log(res)
         for(const pd of res.productS){
           this.name.push(pd.name)
           this.value.push(parseInt(pd.stock))
         }
-        console.log(this.name, this.value)
       },
       error: (err) => console.log(err)
     })

@@ -12,13 +12,13 @@ import {PsucursalesComponent} from './components/psucursales/psucursales.compone
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'home', component: HomeComponent}, /* Quitar*/
+  {path: 'home', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'offices', component: BranchOfficeComponent},
-  {path:  'view-company', component: ViewCompanyComponent},
+  {path: 'view-company', component: ViewCompanyComponent},
   {path: 'productsCompany', component: ProductsComponent},
-  {path: 'officeProduct', component: PsucursalesComponent},
+  {path: 'officeProduct/:id', component: PsucursalesComponent},
   {path: '**', component: NotFoundComponent}
 
 ];
