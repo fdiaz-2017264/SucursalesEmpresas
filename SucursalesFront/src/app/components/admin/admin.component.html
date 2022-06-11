@@ -6,14 +6,21 @@
 
     <div class="img-fluid m-2">
       <p class="text-center fs-1">Company</p>
-      
-
     </div>
-
   </div>
   <hr>
-
+<div class="m-3 position-relative">
+    <div class="m-2">
+        <button type="button" class="btn btn-dark">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
+<path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"></path>
+</svg>
+            Add Company
+          </button>    </div>
+</div>
     <div class="m-4 text-center table-responsive">
+        
     <table class="table table-dark table-striped">
       <thead>
         <tr>
@@ -27,13 +34,34 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor=" let i = index">
-          <th scope="row">{{i+1 }}</th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+        <tr >
+          <th scope="row">1</th>
+          <td>hola</td>
+          <td>como</td>
+          <td>te</td>
+          <td>va</td>
+          <td> <svg  data-bs-target="#exampleModal" data-bs-toggle="modal" style="margin-right: 7%; cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="30"
+            height="30" fill="currentColor" class="bi bi-send-plus-fill" viewBox="0 0 16 16">
+            <path
+                d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 1.59 2.498C8 14 8 13 8 12.5a4.5 4.5 0 0 1 5.026-4.47L15.964.686Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z" />
+            <path
+                d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-3.5-2a.5.5 0 0 0-.5.5v1h-1a.5.5 0 0 0 0 1h1v1a.5.5 0 0 0 1 0v-1h1a.5.5 0 0 0 0-1h-1v-1a.5.5 0 0 0-.5-.5Z" />
+        </svg>
+
+        <svg  style="margin-right: 7%; cursor: pointer;"
+            xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
+            class="bi bi-trash2-fill" viewBox="0 0 16 16">
+            <path
+                d="M2.037 3.225A.703.703 0 0 1 2 3c0-1.105 2.686-2 6-2s6 .895 6 2a.702.702 0 0 1-.037.225l-1.684 10.104A2 2 0 0 1 10.305 15H5.694a2 2 0 0 1-1.973-1.671L2.037 3.225zm9.89-.69C10.966 2.214 9.578 2 8 2c-1.58 0-2.968.215-3.926.534-.477.16-.795.327-.975.466.18.14.498.307.975.466C5.032 3.786 6.42 4 8 4s2.967-.215 3.926-.534c.477-.16.795-.327.975-.466-.18-.14-.498-.307-.975-.466z" />
+        </svg>
+
+        <svg data-bs-toggle="offcanvas" data-bs-target="#updateProduct"
+            aria-controls="updateProduct" style="margin-right: 2%; cursor: pointer;"
+            xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+            class="bi bi-pencil-fill" viewBox="0 0 16 16">
+            <path
+                d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+        </svg></td>
         </tr>
       </tbody>
     </table>
