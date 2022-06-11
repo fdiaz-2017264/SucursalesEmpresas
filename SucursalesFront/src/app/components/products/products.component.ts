@@ -50,7 +50,7 @@ export class ProductsComponent implements OnInit {
         this.getProducts();
         saveProductForm.reset();
       },
-      error: (err)=> console.log(err)
+      error: (err)=> alert(err.error.message || err.error)
     })
   }
  
