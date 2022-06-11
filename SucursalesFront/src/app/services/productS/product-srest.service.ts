@@ -22,5 +22,9 @@ export class ProductSRestService {
     return this.http.get(environment.baseUrl + 'productS/getProduct', {headers: this.httpOptions});
   }
 
+  saveProduct(id: string, params:{}){
+    return this.http.post(environment.baseUrl + 'createProduct/' + id, params, {headers: this.httpOptions});
+  }
+
   
 }

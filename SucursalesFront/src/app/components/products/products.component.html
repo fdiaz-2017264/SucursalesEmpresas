@@ -16,6 +16,7 @@
             Product</button>
     </div>
 
+
 </div>
 
 
@@ -35,7 +36,7 @@
                 <td>{{ pd.nameProduct }}</td>
                 <td>{{pd.nameProvider}}</td>
                 <td>
-                    <svg style="margin-right: 7%; cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="30"
+                    <svg (click)="getProduct(pd._id)" data-bs-target="#exampleModal" data-bs-toggle="modal" style="margin-right: 7%; cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="30"
                         height="30" fill="currentColor" class="bi bi-send-plus-fill" viewBox="0 0 16 16">
                         <path
                             d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 1.59 2.498C8 14 8 13 8 12.5a4.5 4.5 0 0 1 5.026-4.47L15.964.686Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z" />
@@ -139,3 +140,31 @@
 
 
 <app-footer></app-footer>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="stock" class="form-label mt-4">Stock </label>
+                <input [(ngModel)]="productModel.stock" name="stock" type="text" class="form-control" id="stock"
+                    placeholder="Stock">
+            </div>
+            <div class="form-group">
+                <label for="Sell" class="form-label mt-4">Sell </label>
+                <input [(ngModel)]="productModel.cantidadV" name="Sell" type="text" class="form-control" id="Sell"
+                    placeholder="Sell">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button (click)="exportProduct()" type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
