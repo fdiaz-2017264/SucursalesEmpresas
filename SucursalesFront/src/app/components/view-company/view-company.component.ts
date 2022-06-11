@@ -87,6 +87,7 @@ export class ViewCompanyComponent implements OnInit {
       next: (res: any) => {
         localStorage.removeItem('token');
         localStorage.removeItem('identity');
+        this.router.navigateByUrl('/login');
         Swal.fire({
           position: 'top-end',
           title: res.message,
@@ -125,31 +126,7 @@ export class ViewCompanyComponent implements OnInit {
       })
     })
   }
-
-  /*-------------------------------Eliminar la Compañia*--------------------------*/
-  deleteCompany() {
-    this.companyRest.deleteCompany(this.companyRest.getIdentity()._id).subscribe({
-      next: (res: any) => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('identity');
-        Swal.fire({
-          position: 'top',
-          title: res.message,
-          icon: 'success',
-          showConfirmButton: false,
-          timer: 900
-        })
-        this.router.navigateByUrl('/login');
-      },
-      error: (err) => Swal.fire({
-        icon: 'error',
-        title: 'Oops..',
-        text: 'Hubo un problema, intentalo de nuevo',
-        showConfirmButton: false,
-        timer: 1000
-      })
-    })
-  }
+  
 
 }
 
