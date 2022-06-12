@@ -9,15 +9,17 @@ import { CompanyRestService } from 'src/app/services/companyRest/company-rest.se
 })
 export class HomeComponent implements OnInit {
   company: CompanyModel
+  identity:any
 
   constructor(
-    private companyRest: CompanyRestService
+    private companyRest: CompanyRestService,
   ) {
     this.company = new CompanyModel('','','','','','')
    }
 
   ngOnInit(): void {
     this.getCompany();
+    this.identity = this.companyRest.getIdentity().role;
   }
 
   getCompany() {

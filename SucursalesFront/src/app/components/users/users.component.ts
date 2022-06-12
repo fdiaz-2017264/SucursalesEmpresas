@@ -110,6 +110,7 @@ export class UsersComponent implements OnInit {
           showConfirmButton: false,
           timer: 1000
         })
+        this.getCompanies();
       },
       error: (err) => Swal.fire({
         icon: 'error',

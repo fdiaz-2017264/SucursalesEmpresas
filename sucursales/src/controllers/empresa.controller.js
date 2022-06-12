@@ -127,6 +127,7 @@ exports.createAdmin = async (req, res) => {
                 password: '123456',
                 role: 'ADMIN'
             }
+            data.password = await encrypt(data.password)
             const admin = new Empresa(data);
             await admin.save();
         }
